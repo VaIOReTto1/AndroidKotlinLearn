@@ -10,10 +10,13 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Log.d("MainActivity",this.toString())
+        Log.d("MainActivity","Task id is $taskId")
         setContentView(R.layout.first_layout)
+        doSomething()
         val button1: Button = findViewById(R.id.button1)
         button1.setOnClickListener {
             //Toast.makeText(this, "you clicked Button 1", Toast.LENGTH_SHORT).show()
@@ -37,8 +40,13 @@ class MainActivity : AppCompatActivity() {
 //            intent1.putExtra("extra_data",data)
 //            startActivity(intent1)
 
-            val intent=Intent(this,MainActivity2::class.java)
-            startActivityForResult(intent,1)
+//            val intent=Intent(this,MainActivity2::class.java)
+//            startActivityForResult(intent,1)
+
+//            val intent=Intent(this,MainActivity2::class.java)
+//            startActivity(intent)
+
+            MainActivity2.actionStart(this,"data1","data2")
         }
     }
 
@@ -65,5 +73,10 @@ class MainActivity : AppCompatActivity() {
                 .show()
         }
         return true
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d("MainActivity","onRestart")
     }
 }

@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import java.lang.StringBuilder
 import java.util.Locale
 import kotlin.math.max
 
@@ -135,6 +136,47 @@ fun test10() {
     }.start()
 }
 
+fun test11() {
+    val list = listOf("Apple", "banana", "watermellon")
+    val builder = StringBuilder()
+    builder.append("Start eating fruit.\n")
+    for (fruit in list)
+        builder.append(fruit).append("\n")
+    builder.append("Ate all fruits.")
+    val result = builder.toString()
+    println(result)
+    println()
+
+    val result1 = with(StringBuilder()) {
+        append("Start eating fruit.\n")
+        for (fruit in list)
+            append(fruit).append("\n")
+        append("Ate all fruits.")
+        toString()
+    }
+    println(result1)
+    println()
+
+    val result2 = StringBuilder().run{
+        append("Start eating fruit.\n")
+        for (fruit in list)
+            append(fruit).append("\n")
+        append("Ate all fruits.")
+        toString()
+    }
+    println(result2)
+    println()
+
+    val result3 = StringBuilder().apply{
+        append("Start eating fruit.\n")
+        for (fruit in list)
+            append(fruit).append("\n")
+        append("Ate all fruits.")
+        //无返回值
+    }
+    println(result3.toString())
+}
+
 fun main() {
-    test10()
+    test11()
 }
