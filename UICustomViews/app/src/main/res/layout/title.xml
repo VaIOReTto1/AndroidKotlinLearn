@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:background="@mipmap/ic_launcher">
+
+    <Button
+        android:id="@+id/titleBack"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@mipmap/v"
+        android:text="Back"
+        android:textColor="#fff" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Title Text"
+        android:textColor="#36bf36"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/titleEdit"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:background="@mipmap/vv"
+        android:text="Edit"
+        android:textColor="#fff" />
+</LinearLayout>
