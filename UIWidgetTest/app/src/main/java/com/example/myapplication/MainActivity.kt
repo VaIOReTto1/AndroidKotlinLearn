@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 //                    show()
 //                }
 
-                val intent=Intent(this,listView::class.java)
+                val intent=Intent(this,staggeredGridLayoutManager::class.java)
                 startActivity(intent)
             }
         }
