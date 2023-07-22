@@ -14,7 +14,7 @@ import java.lang.IllegalArgumentException
 
 class MainActivity :  AppCompatActivity() ,View.OnClickListener{
     private val msglist=ArrayList<Msg>()
-    private var adapter:MsgAdapter?=null
+    private lateinit var adapter: MsgAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.active_main)
@@ -23,7 +23,8 @@ class MainActivity :  AppCompatActivity() ,View.OnClickListener{
         val LayoutManager=LinearLayoutManager(this)
         val recyclerView:RecyclerView=findViewById(R.id.recycleView)
         recyclerView.layoutManager=LayoutManager
-        adapter=MsgAdapter(msglist)
+        if(!::adapter.isInitialized)
+            adapter=MsgAdapter(msglist)
         recyclerView.adapter=adapter
         val send:Button=findViewById(R.id.send)
         send.setOnClickListener (this)
@@ -65,10 +66,12 @@ class Msg(val context: String,val type: Int){
 }
 
 class MsgAdapter(val msglist:List<Msg>):RecyclerView.Adapter<RecyclerView.ViewHolder>(){
-    inner class LeftViewHolder(view: View):RecyclerView.ViewHolder(view){
+    sealed class MsgViewHolder(view: View):RecyclerView.ViewHolder(view)
+
+    inner class LeftViewHolder(view: View):MsgViewHolder(view){
         val leftMsg:TextView=view.findViewById(R.id.leftMsg)
     }
-    inner class RightViewHolder(view: View):RecyclerView.ViewHolder(view){
+    inner class RightViewHolder(view: View):MsgViewHolder(view){
         val rightMsg:TextView=view.findViewById(R.id.rightMsg)
     }
 
@@ -85,6 +88,9 @@ class MsgAdapter(val msglist:List<Msg>):RecyclerView.Adapter<RecyclerView.ViewHo
         LeftViewHolder(view)
     }else{
         val view=LayoutInflater.from(parent.context).inflate(R.layout.msg_right_item,parent,false)
+        view.layoutParams = RecyclerView.LayoutParams(
+            ViewGroup.LayoutParams.MATCH_PARENT,//避免消息跑到左边
+            ViewGroup.LayoutParams.WRAP_CONTENT)
         RightViewHolder(view)
     }
 
