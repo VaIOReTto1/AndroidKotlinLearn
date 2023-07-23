@@ -20,7 +20,7 @@ import java.lang.StringBuilder
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("MainActivity", "jodsj")
+
         setContentView(R.layout.active_main)
     }
 }
@@ -33,7 +33,7 @@ class NewsContentFragment:Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return inflater.inflate(R.layout.news_content_frag,container,false)
     }
 
     fun refresh(title:String,content:String){
@@ -50,7 +50,7 @@ class NewsTitleFragment:Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return inflater.inflate(R.layout.news_title_frag,container,false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -64,7 +64,7 @@ class NewsTitleFragment:Fragment(){
 
     private fun getNews():List<News>{
         val newslist=ArrayList<News>()
-        for(i in 1..2){
+        for(i in 1..50){
             val news=News("This is news title $i",getRandomLengthString("This is news content $i"))
             newslist.add(news)
         }
@@ -72,7 +72,7 @@ class NewsTitleFragment:Fragment(){
     }
 
     private fun getRandomLengthString(string: String):String{
-        val n=(1..2).random()
+        val n=(1..20).random()
         val builder=StringBuilder()
         repeat(n){
             builder.append(string)
@@ -87,6 +87,10 @@ class NewsTitleFragment:Fragment(){
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             val view=LayoutInflater.from(parent.context).inflate(R.layout.news_title_item,parent,false)
+            view.layoutParams = RecyclerView.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        )
             val holder=ViewHolder(view)
             holder.itemView.setOnClickListener {
                 val news=newslist[holder.adapterPosition]
@@ -94,6 +98,7 @@ class NewsTitleFragment:Fragment(){
                     val fragment=newsContentFrag as NewsContentFragment
                     fragment.refresh(news.title,news.content)
                 }else{
+                    Log.d("MainActivity", "${news.title}title")
                     NewsContentActivity.actionStart(parent.context,news.title,news.content)
                 }
             }

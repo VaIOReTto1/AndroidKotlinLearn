@@ -157,7 +157,7 @@ fun test11() {
     println(result1)
     println()
 
-    val result2 = StringBuilder().run{
+    val result2 = StringBuilder().run {
         append("Start eating fruit.\n")
         for (fruit in list)
             append(fruit).append("\n")
@@ -167,7 +167,7 @@ fun test11() {
     println(result2)
     println()
 
-    val result3 = StringBuilder().apply{
+    val result3 = StringBuilder().apply {
         append("Start eating fruit.\n")
         for (fruit in list)
             append(fruit).append("\n")
@@ -177,6 +177,109 @@ fun test11() {
     println(result3.toString())
 }
 
+fun String.letterCount(): Int {
+    var count = 0
+    for (char in this) {
+        if (char.isLetter())
+            count++
+    }
+    return count
+}
+
+fun test12() {
+    val count = "shedashd##45".letterCount()
+    println(count)
+}
+
+class Money(val value: Int) {
+    operator fun plus(money: Money): Money {
+        val sum = value + money.value
+        return Money(sum)
+    }
+
+    operator fun plus(newValue: Int): Money {
+        val sum = value + newValue
+        return Money(sum)
+    }
+}
+
+fun test13() {
+    val money1 = Money(10)
+    val money2 = Money(5)
+    val money3 = money1 + money2
+    println(money3.value)
+    val money4 = money3 + 5
+    println(money4.value)
+}
+
+inline fun num1AndNum2(num1: Int, num2: Int, operation: (Int, Int) -> Int): Int {
+    val result = operation(num1, num2)
+    return result
+}
+
+fun plus(num1: Int, num2: Int): Int {
+    return num1 + num2
+}
+
+fun minus(num1: Int, num2: Int): Int {
+    return num1 - num2
+}
+
+fun StringBuilder.build(block:StringBuilder.()->Unit):StringBuilder{
+    block()
+    return this
+}
+
+fun printString(string: String,block: (String) -> Unit){
+    println("printString begin")
+    block(string)
+    println("printString end")
+}
+
+inline fun printString1(string: String,block: (String) -> Unit){
+    println("printString begin")
+    block(string)
+    println("printString end")
+}
+
+fun HigherOrderFuction() {
+//    val num1 = 20
+//    val num2 = 50
+////    val result1= num1AndNum2(num1,num2,::plus)
+////    val result2= num1AndNum2(num1,num2,::minus)
+//    val result1 = num1AndNum2(num1, num2) { n1, n2 -> n1 + n2 }
+//    val result2 = num1AndNum2(num1, num2) { n1, n2 -> n1 - n2 }
+//    println("result1 is $result1")
+//    println("result2 is $result2")
+
+//    val list= listOf("Apple","Banana","Pear","Orange")
+//    //形成与apply同样的效果
+//    val result=StringBuilder().build {
+//        append("Start eating fruits.\n")
+//        for (fruit in list)
+//            append(fruit).append("\n")
+//        append("Ate all fruits")
+//    }
+//    println(result.toString())
+
+    val str=""
+    //只是局部返回
+    printString(str){s->
+        println("Lambda start")
+        if(s.isEmpty()) return@printString
+        println(s)
+        println("Lambda end")
+    }
+    println()
+
+    printString1(str){s->
+        println("Lambda start")
+        if(s.isEmpty()) return
+        println(s)
+        println("Lambda end")
+    }
+}
+
 fun main() {
-    test11()
+    HigherOrderFuction()
 }
