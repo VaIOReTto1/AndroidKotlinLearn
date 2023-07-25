@@ -12,6 +12,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light"
         tools:targetApi="31">
+        <provider
+            android:name=".DatabaseProvider"
+            android:authorities="com.example.databasetest.provider"
+            android:enabled="true"
+            android:exported="true">
+        </provider>
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -19,7 +25,6 @@
             android:theme="@style/Theme.AppCompat.Light">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

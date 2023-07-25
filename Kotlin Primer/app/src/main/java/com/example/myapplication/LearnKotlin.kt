@@ -280,6 +280,15 @@ fun HigherOrderFuction() {
     }
 }
 
+fun <T> T.build(block:T.() -> Unit):T{
+    block()
+    return this
+}
+
+class Myset<T>(val helperSet:HashSet<T>):Set<T> by helperSet{
+    fun helloWorld()= println("Hello World")
+}
+
 fun main() {
     HigherOrderFuction()
 }

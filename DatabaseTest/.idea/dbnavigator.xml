@@ -12,7 +12,7 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="887bd233-75ad-4e94-9f62-2499ec143d36">
+    <connection id="7aabbfc4-294a-48d0-85f8-0c48e61b4afa">
       <console name="Connection" type="STANDARD" schema="" session="Main" />
     </connection>
   </component>
@@ -23,7 +23,7 @@
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatasetFilterManager">
-    <filter-actions connection-id="887bd233-75ad-4e94-9f62-2499ec143d36" dataset="main.Book" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="7aabbfc4-294a-48d0-85f8-0c48e61b4afa" dataset="main.Book" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.ExecutionManager">
     <retain-sticky-names value="false" />
@@ -42,7 +42,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="887bd233-75ad-4e94-9f62-2499ec143d36" active="true" signed="true">
+      <connection id="7aabbfc4-294a-48d0-85f8-0c48e61b4afa" active="true" signed="true">
         <database>
           <name value="Connection" />
           <description value="" />

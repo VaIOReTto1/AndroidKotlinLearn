@@ -57,41 +57,39 @@ class MainActivity : AppCompatActivity() {
         }
 
         queryData.setOnClickListener {
-            val db = dhHelper.writableDatabase
-            val cursor = db.query("Book", null, null, null, null, null, null)
-            if (cursor.moveToFirst()) {
-                do {
-                    val name: String = cursor.getString(cursor.getColumnIndex("name"))
-                    val author = cursor.getString(cursor.getColumnIndex("author"))
-                    val price = cursor.getString(cursor.getColumnIndex("price"))
-                    val pages = cursor.getString(cursor.getColumnIndex("pages"))
-                    Log.d("MainActivity", "Book name is $name")
-                    Log.d("MainActivity", "Book author is $author")
-                    Log.d("MainActivity", "Book pages is $pages")
-                    Log.d("MainActivity", "Book price is $price")
-                } while (cursor.moveToNext())
+            val db=dhHelper.writableDatabase
+            val cursor=db.query("Book",null,null,null,null,null,null)
+            if (cursor.moveToFirst()){
+                do{
+                    val name:String=cursor.getString(cursor.getColumnIndex("name"))
+                    val author=cursor.getString(cursor.getColumnIndex("author"))
+                    val price=cursor.getString(cursor.getColumnIndex("price"))
+                    val pages=cursor.getString(cursor.getColumnIndex("pages"))
+                    Log.d("MainActivity","Book name is $name")
+                    Log.d("MainActivity","Book author is $author")
+                    Log.d("MainActivity","Book pages is $pages")
+                    Log.d("MainActivity","Book price is $price")
+                }while (cursor.moveToNext())
             }
             cursor.close()
         }
 
         replaceData.setOnClickListener {
-            val db = dhHelper.writableDatabase
+            val db=dhHelper.writableDatabase
             db.beginTransaction()
             try {
-                db.delete("Book", null, null)
+                db.delete("Book",null,null)
 //                if(true)
 //                    throw NullPointerException()
-                val values = contentValuesOf(
-                    "name" to "Game of Thrones",
-                    "author" to "George Martin",
-                    "pages" to 720,
-                    "price" to 20.85
-                )
-                db.insert("Book", null, values)
+                val values= contentValuesOf("name" to "Game of Thrones",
+                        "author" to "George Martin",
+                "pages" to 720,
+                "price" to 20.85)
+                db.insert("Book",null,values)
                 db.setTransactionSuccessful()
-            } catch (e: Exception) {
+            }catch (e:Exception){
                 e.printStackTrace()
-            } finally {
+            }finally {
                 db.endTransaction()
             }
 
