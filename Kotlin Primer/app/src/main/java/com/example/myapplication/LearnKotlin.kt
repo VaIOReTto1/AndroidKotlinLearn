@@ -1,5 +1,7 @@
 package com.example.myapplication
 
+import android.content.Context
+import android.content.Intent
 import java.lang.StringBuilder
 import java.util.Locale
 import kotlin.math.max
@@ -289,6 +291,60 @@ class Myset<T>(val helperSet:HashSet<T>):Set<T> by helperSet{
     fun helloWorld()= println("Hello World")
 }
 
+inline fun <reified T> getGenericType()=T::class.java
+
+fun test14(){
+    val result1= getGenericType<String>()
+    val result2= getGenericType<Int>()
+    println("result is $result1")
+    println("result is $result2")
+}
+
+inline fun <reified T> startActivity(context: Context,block: Intent.() -> Unit){
+    val intent=Intent(context,T::class.java)
+    intent.block()
+    context.startActivity(intent)
+}
+
+open class Person5(val name: String,val age:Int)
+class Student5(name: String,age: Int):Person5(name,age)
+class Teacher5(name: String,age: Int):Person5(name,age)
+
+class SimpleData<out  T>(val data:T?){
+    fun get():T?{
+        return data
+    }
+}
+
+fun handleMYData(data: SimpleData<Person5>){
+    val personData=data.get()
+}
+
+fun test15(){
+    val sudent=Student5("Tom",19)
+    val data=SimpleData<Student5>(sudent)
+    handleMYData(data)
+    val StudentData=data.get()
+}
+
+interface Transformer<in T>{
+    fun transform(t:T):String
+}
+
+fun handleTransformer(trans:Transformer<Student5>){
+    val student=Student5("Tom",19)
+    val result=trans.transform(student)
+}
+
+fun test16(){
+    val trans=object : Transformer<Person5>{
+        override fun transform(t: Person5): String {
+            return "${t.name} ${t.age}"
+        }
+    }
+    handleTransformer(trans)
+}
+
 fun main() {
-    HigherOrderFuction()
+    test16()
 }
