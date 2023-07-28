@@ -2,6 +2,14 @@ package com.example.myapplication
 
 import android.content.Context
 import android.content.Intent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 import java.lang.StringBuilder
 import java.util.Locale
 import kotlin.math.max
@@ -345,6 +353,110 @@ fun test16(){
     handleTransformer(trans)
 }
 
+fun test17(){
+    GlobalScope.launch {
+        println("codes run in coroutine scope")
+        delay(1500)
+        println("code run in coroutine scope finished")
+    }
+    Thread.sleep(1000)
+}
+
+fun test18(){
+    runBlocking {
+        println("codes run in coroutine scope")
+        delay(1500)
+        println("code run in coroutine scope finished")
+    }
+}
+
+fun test19(){
+    runBlocking {
+        launch {
+            println("launch 1")
+            delay(1000)
+            println("launch1 finished")
+        }
+        launch {
+            println("launch 2")
+            delay(1000)
+            println("launch2 finished")
+        }
+    }
+}
+
+fun test20(){
+    val start=System.currentTimeMillis()
+    runBlocking {
+        repeat(100000){
+            launch {
+                println(".")
+            }
+        }
+    }
+    val end=System.currentTimeMillis()
+    println(end-start)
+}
+
+fun test21(){
+    runBlocking {
+        coroutineScope {
+            launch {
+                for (i in 1..10){
+                    println(i)
+                    delay(1000)
+                }
+            }
+        }
+        println("coroutineScope finished")
+    }
+    println("runBlocking finished")
+}
+
+fun test22(){
+    runBlocking {
+        val start=System.currentTimeMillis()
+        val deferred1=async {
+            delay(1000)
+            5+5
+        }
+        val deferred2=async {
+            delay(1000)
+            4+6
+        }
+        println("result is ${deferred1.await()+deferred2.await()}")
+        val end=System.currentTimeMillis()
+        println("const ${end-start} milliseconds")
+    }
+}
+
+fun test23(){
+    runBlocking {
+        val result= withContext(Dispatchers.Default){
+            5+5
+        }
+        println(result)
+    }
+}
+
+fun <T:Comparable<T>>  max3(vararg nums:T):T{
+    if (nums.isEmpty()) throw RuntimeException("Params can not be empty")
+    var maxNum=nums[0]
+    for(num in nums)
+        if (num>maxNum)
+            maxNum=num
+
+    return maxNum
+}
+
+fun test24(){
+    val a=3.5
+    val b=3.8
+    val c=4.1
+    val largest= max3(a,b,c)
+    println(largest)
+}
+
 fun main() {
-    test16()
+    test24()
 }

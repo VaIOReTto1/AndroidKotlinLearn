@@ -68,9 +68,12 @@ class MainActivity : AppCompatActivity() {
                     .build()
                 val response = client.newCall(request).execute()
                 val responseData = response.body?.string()
-                Log.d("MainActivity", "JSON Response: $responseData")
+                val responseData1="[{\"id\":\"5\",\"version\":\"5.5\",\"name\":\"Clash of Clans\"},\n" +
+                        "{\"id\":\"6\",\"version\":\"7.0\",\"name\":\"Boom Beach\"},\n" +
+                        "{\"id\":\"7\",\"version\":\"3.5\",\"name\":\"Clash Royale\"}]"
+                Log.d("MainActivity", "JSON Response: $responseData1")
                 if (responseData != null)
-                    parseJSONWithGSON(responseData)
+                    parseJSONWithJSONObject(responseData1)
             } catch (e: Exception) {
                 e.printStackTrace()
             }
