@@ -457,6 +457,28 @@ fun test24(){
     println(largest)
 }
 
+fun test25(){
+    val libraries= dependencies {
+        implementation ("com.squareup.retrofit2:retrofit:2.6.1")
+        implementation ("com.squareup.retrofit2:converter-gson:2.6.1")
+    }
+    for (lib in libraries)
+        println(lib)
+}
+
+fun test26(){
+    val html= table {
+        repeat(2){
+            tr {
+                val fruits= listOf("Apple","Grape","Orange")
+                for (fruit in fruits)
+                    td { fruit }
+            }
+        }
+    }
+    println(html)
+}
+
 fun main() {
-    test24()
+    test26()
 }

@@ -23,4 +23,46 @@
         android:layout_height="wrap_content"
         android:id="@+id/clearBtn"
         android:text="Clear"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/getUserBtn"
+        android:layout_gravity="center_horizontal"
+        android:text="Get User"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/addDataBtn"
+        android:layout_gravity="center_horizontal"
+        android:text="Add Data"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/updateBtn"
+        android:layout_gravity="center_horizontal"
+        android:text="Update Data"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/deleteDatarBtn"
+        android:layout_gravity="center_horizontal"
+        android:text="Delete Data"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/queryDataBtn"
+        android:layout_gravity="center_horizontal"
+        android:text="Query Data"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/doWorkBtn"
+        android:layout_gravity="center_horizontal"
+        android:text="Do Work"/>
 </LinearLayout>
